@@ -199,7 +199,7 @@ class TGAPIView(APIView):
         else: #그게 아니면
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) #400 에러 코드를 보낸다.
 
-    def delete(self, request, id): #번역기를 넣는 이유는 무엇을 지웠는지 알기 위해서였다.
+    def delete(self, request, id):
         target = Targets.objects.get(id=id) #목표를 조회한다 아이디로 그걸 목표라는 변수에 담는다.
         target_name = target.name #목표 이름이란 변수에 목표의 이름을 담는다.
         target.delete() #목표를 삭제한다.
@@ -218,7 +218,8 @@ class TargetachieveAPIView(APIView):
                 "target_name": target.name,
                 "value": target.value,
                 "is_achieved": True if target.value <= stamps else False,
-            }  # True아니면 False를 achieve를 변수에 넣는다.
+            }  # True아니면 False를 is_achieve라는 키에 벨류로 넣는다.
+            #만약 타겟.벨류가 스템프 보다 적거나 같으면 true를 반환하고, 아니라면 False를 반환한다.
             result.append(achieve)
         serializer = TargetachieveSerializer({"stamp": stamps, "targets": result})
         return Response(serializer.data)
