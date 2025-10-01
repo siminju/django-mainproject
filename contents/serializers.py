@@ -46,4 +46,4 @@ class ContentsSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['id', 'name']  # 필요한 필드만 넣으세요
+        fields = "__all__"  # 필요한 필드만 넣으세요

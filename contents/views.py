@@ -100,7 +100,7 @@ class SeachAPIView(APIView):
 
 class TagAPIView(APIView):
     def get(self, request, tag_name):
-        tag = Tags.objects.get(id=id)
+        tag = Tags.objects.get(tag_name=tag_name)
         serializer = TagsSerializer(tag)
         return Response(serializer.data)
 
@@ -223,9 +223,3 @@ class TargetachieveAPIView(APIView):
         serializer = TargetachieveSerializer({"stamp": stamps, "targets": result})
         return Response(serializer.data)
 
-
-class TagsAPIView(APIView):
-    def get(self, request, tag_name):
-        tag = get_object_or_404(Tag, name=tag_name)
-        serializer = TagSerializer(tag, many=True)
-        return Response(serializer.data)
